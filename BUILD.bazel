@@ -1,0 +1,11 @@
+# Add rules here to build your software
+# See https://docs.bazel.build/versions/main/build-ref.html#BUILD_files
+
+exports_files([
+    ".eslintignore",
+    ".eslintrc.js",
+    ".nvmrc",
+    "package.json",
+    "tsconfig.json",
+    "yarn.lock",
+])

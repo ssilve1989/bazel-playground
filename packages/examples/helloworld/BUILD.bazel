@@ -1,0 +1,15 @@
+load("//tools:node/index.bzl", "ts_project")
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+
+ts_project(
+  name = "source",
+  srcs = ["main.ts"]
+)
+
+nodejs_binary(
+  name = "helloworld",
+  entry_point = ":main.ts",
+  data = [
+    ":source"
+  ]
+)
