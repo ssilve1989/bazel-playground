@@ -5,9 +5,17 @@
 # Install the nodejs "bootstrap" package
 # This provides the basic tools for running and packaging nodejs programs in Bazel
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 def fetch_dependencies():
     http_archive(
         name = "build_bazel_rules_nodejs",
         sha256 = "3aa6296f453ddc784e1377e0811a59e1e6807da364f44b27856e34f5042043fe",
         urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/4.4.2/rules_nodejs-4.4.2.tar.gz"],
+    )
+
+    http_archive(
+        name = "io_bazel_rules_docker",
+        sha256 = "92779d3445e7bdc79b961030b996cb0c91820ade7ffa7edca69273f404b085d5",
+        strip_prefix = "rules_docker-0.20.0",
+        urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.20.0/rules_docker-v0.20.0.tar.gz"],
     )

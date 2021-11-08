@@ -1,5 +1,7 @@
+"""Help Macro to facilitate creating Nest application targets"""
 load("//tools:node/ts_project.bzl", "ts_project")
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+load("@io_bazel_rules_docker//nodejs:image.bzl", "nodejs_image")
 
 NEST_DATA = [
     "@npm//@nestjs/core",
@@ -27,4 +29,10 @@ def nest_app(name, srcs, entry_point, **kwargs):
         ],
         entry_point = entry_point,
         **kwargs
+    )
+
+    nodejs_image(
+      name = "image",
+      binary = name,
+      args = ["--bazel_patch_module_resolver"]
     )

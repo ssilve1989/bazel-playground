@@ -14,7 +14,18 @@ load("//tools:bazel_deps.bzl", "fetch_dependencies")
 
 fetch_dependencies()
 
+# Docker Setup
+load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
+
+container_repositories()
+
+load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
+
+container_deps()
+
+# NodeJS Setup
 load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
+load("@io_bazel_rules_docker//nodejs:image.bzl", _nodejs_image_repos = "repositories")
 
 node_repositories(
     use_nvmrc = "//:.nvmrc",
@@ -26,3 +37,5 @@ yarn_install(
     package_json = "//:package.json",
     yarn_lock = "//:yarn.lock",
 )
+
+_nodejs_image_repos()
