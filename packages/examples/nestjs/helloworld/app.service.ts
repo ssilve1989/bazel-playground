@@ -5,7 +5,7 @@ class AppService implements OnApplicationBootstrap {
   private readonly logger = new Logger(AppService.name);
 
   onApplicationBootstrap() {
-    this.logger.log('hello world')
+    this.logger.log("hello world");
   }
 }
 
