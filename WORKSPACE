@@ -39,3 +39,25 @@ yarn_install(
 )
 
 _nodejs_image_repos()
+
+# Scala Setup
+# Stores Scala version and other configuration
+# 2.12 is a default version, other versions can be use by passing them explicitly:
+# scala_config(scala_version = "2.11.12")
+load("@io_bazel_rules_scala//:scala_config.bzl", "scala_config")
+
+scala_config(scala_version = "2.13.6")
+
+load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
+
+scala_repositories()
+
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+
+rules_proto_dependencies()
+
+rules_proto_toolchains()
+
+load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
+
+scala_register_toolchains()
