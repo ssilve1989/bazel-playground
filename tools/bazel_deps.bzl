@@ -19,6 +19,29 @@ def fetch_dependencies():
         urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.20.0/rules_docker-v0.20.0.tar.gz"],
     )
 
+    http_archive(
+        name = "rules_proto",
+        sha256 = "66bfdf8782796239d3875d37e7de19b1d94301e8972b3cbd2446b332429b4df1",
+        strip_prefix = "rules_proto-4.0.0",
+        urls = [
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0.tar.gz",
+            "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0.tar.gz",
+        ],
+    )
+
+    # Commit: df8f82e4fb806e07362aa37f7eb23b2e18cca5ae
+    # Date: 2021-10-29 16:18:29 +0000 UTC
+    # URL: https://github.com/stackb/rules_proto/commit/df8f82e4fb806e07362aa37f7eb23b2e18cca5ae
+    #
+    # Update README; use canonical labels
+    # Size: 877766 (878 kB)
+    http_archive(
+        name = "build_stack_rules_proto",
+        sha256 = "e707173400a15982ccc1147ea58ef81f65d414e5c33b45b505110b53d4d23a76",
+        strip_prefix = "rules_proto-df8f82e4fb806e07362aa37f7eb23b2e18cca5ae",
+        urls = ["https://github.com/stackb/rules_proto/archive/df8f82e4fb806e07362aa37f7eb23b2e18cca5ae.tar.gz"],
+    )
+
     skylib_version = "1.0.3"
     http_archive(
         name = "bazel_skylib",

@@ -52,12 +52,56 @@ load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
 
 scala_repositories()
 
+# load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+
+# rules_proto_dependencies()
+
+# rules_proto_toolchains()
+
+load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
+
+scala_register_toolchains()
+
+# rules proto setup
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 
 rules_proto_dependencies()
 
 rules_proto_toolchains()
 
-load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
+# StackB Protos
+register_toolchains("@build_stack_rules_proto//toolchain:standard")
 
-scala_register_toolchains()
+load("@build_stack_rules_proto//deps:core_deps.bzl", "core_deps")
+
+core_deps()
+
+load(
+    "@io_bazel_rules_go//go:deps.bzl",
+    "go_register_toolchains",
+    "go_rules_dependencies",
+)
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+
+go_register_toolchains()
+
+go_rules_dependencies()
+
+go_repository(
+    name = "in_gopkg_yaml_v3",
+    build_file_generation = "on",
+    build_file_proto_mode = "disable",
+    importpath = "gopkg.in/yaml.v3",
+    sum = "h1:h8qDotaEPuJATrMmW04NCwg7v22aHH28wwpauUhK9Oo=",
+    version = "v3.0.0-20210107192922-496545a6307b",
+)
+
+gazelle_dependencies()
+
+load("@build_stack_rules_proto//:go_deps.bzl", "gazelle_protobuf_extension_go_deps")
+
+gazelle_protobuf_extension_go_deps()
+
+load("@build_stack_rules_proto//deps:protobuf_core_deps.bzl", "protobuf_core_deps")
+
+protobuf_core_deps()

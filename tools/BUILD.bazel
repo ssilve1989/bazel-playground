@@ -1,1 +1,4 @@
 # Currently there are no targets in this Bazel package
+exports_files([
+    "rules_proto_config.yaml",
+])
