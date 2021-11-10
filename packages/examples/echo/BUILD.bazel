@@ -1,0 +1,27 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_scala//scala_proto:scala_proto.bzl", "scala_proto_library")
+
+package(default_visibility = ["//visibility:public"])
+
+proto_library(
+    name = "proto_messages",
+    srcs = [
+        "echo.proto",
+        "stream_echo.proto",
+    ],
+)
+
+proto_library(
+    name = "proto_service",
+    srcs = ["echo_service.proto"],
+    deps = [
+        ":proto_messages",
+    ],
+)
+
+scala_proto_library(
+    name = "scala",
+    deps = [
+        ":proto_messages",
+    ],
+)
