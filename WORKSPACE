@@ -80,6 +80,36 @@ grpc_java_repositories()
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 load("//tools:scala/dependencies.bzl", "SCALA_DEPS")
 
+# bind(
+#     name = "io_bazel_rules_scala/dependency/proto/protoc_bridge",
+#     actual = scala_dep("@maven//:com_thesamet_scalapb_protoc_bridge"),
+# )
+
+# bind(
+#     name = "io_bazel_rules_scala/dependency/proto/scalapbc",
+#     actual = scala_dep("@maven//:com_thesamet_scalapb_scalapbc"),
+# )
+
+# bind(
+#     name = "io_bazel_rules_scala/dependency/proto/scalapb_plugin",
+#     actual = scala_dep("@maven//:com_thesamet_scalapb_compilerplugin"),
+# )
+
+# bind(
+#     name = "io_bazel_rules_scala/dependency/proto/scalapb_runtime",
+#     actual = scala_dep("@maven//:com_thesamet_scalapb_scalapb_runtime"),
+# )
+
+# bind(
+#     name = "io_bazel_rules_scala/dependency/proto/scalapb_runtime_grpc",
+#     actual = scala_dep("@maven//:com_thesamet_scalapb_scalapb_runtime_grpc"),
+# )
+
+# bind(
+#     name = "io_bazel_rules_scala/dependency/proto/scalapb_lenses",
+#     actual = scala_dep("@maven//:com_thesamet_scalapb_lenses"),
+# )
+
 maven_install(
     name = "rules_proto_grpc_scala_maven",
     artifacts = RULES_PROTO_GRPC_SCALA_MAVEN_ARTIFACTS,

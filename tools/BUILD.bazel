@@ -10,12 +10,11 @@ proto_plugin(
     name = "akka_plugin",
     out = "{name}.jar",
     options = [
+        "server_power_apis",
         "generate_client=true",
         "generate_server=true",
         "language=scala",
-        "server_power_apis=true",
-        "flat_package=true",
-        "grpc=false",  # Trying to get rid of the non power api stuff, doesn't work
+        "flat_package",
     ],
     tool = "@com_github_akka_akka_gprc//file",
     visibility = ["//visibility:public"],

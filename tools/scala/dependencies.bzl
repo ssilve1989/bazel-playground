@@ -5,6 +5,7 @@ AKKA_HTTP_VERSION = "10.2.7"
 AKKA_VERSION = "2.6.17"
 GRPC_VERSION = "1.35.0"
 SCALA_VERSION = "2.13"
+SCALAPB_VERSION = "0.10.11"
 
 SCALA_DEPS = [
     "com.typesafe.akka:akka-http_%s:%s" % (SCALA_VERSION, AKKA_HTTP_VERSION),
@@ -30,6 +31,11 @@ SCALA_DEPS = [
     "io.grpc:grpc-netty:%s" % GRPC_VERSION,
     "io.grpc:grpc-protobuf:%s" % GRPC_VERSION,
     "io.grpc:grpc-stub:%s" % GRPC_VERSION,
+    "com.thesamet.scalapb:scalapb-json4s_%s:0.10.0" % SCALA_VERSION,
+    "com.thesamet.scalapb:scalapb-runtime-grpc_%s:%s" % (SCALA_VERSION, SCALAPB_VERSION),
+    "com.thesamet.scalapb:scalapb-runtime_%s:%s" % (SCALA_VERSION, SCALAPB_VERSION),
+    "com.thesamet.scalapb:scalapbc_%s:%s" % (SCALA_VERSION, SCALAPB_VERSION),
+    "com.google.protobuf:protobuf-java:3.15.8",
 ]
 
 def scala_dep(dep):
