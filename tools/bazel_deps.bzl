@@ -4,8 +4,10 @@
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# buildifier: disable=function-docstring
 def fetch_dependencies():
+    """
+      load all http archive in first-one wins order
+    """
     http_archive(
         name = "build_bazel_rules_nodejs",
         sha256 = "3aa6296f453ddc784e1377e0811a59e1e6807da364f44b27856e34f5042043fe",
@@ -27,19 +29,6 @@ def fetch_dependencies():
             "https://mirror.bazel.build/github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0.tar.gz",
             "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0.tar.gz",
         ],
-    )
-
-    # Commit: df8f82e4fb806e07362aa37f7eb23b2e18cca5ae
-    # Date: 2021-10-29 16:18:29 +0000 UTC
-    # URL: https://github.com/stackb/rules_proto/commit/df8f82e4fb806e07362aa37f7eb23b2e18cca5ae
-    #
-    # Update README; use canonical labels
-    # Size: 877766 (878 kB)
-    http_archive(
-        name = "build_stack_rules_proto",
-        sha256 = "e707173400a15982ccc1147ea58ef81f65d414e5c33b45b505110b53d4d23a76",
-        strip_prefix = "rules_proto-df8f82e4fb806e07362aa37f7eb23b2e18cca5ae",
-        urls = ["https://github.com/stackb/rules_proto/archive/df8f82e4fb806e07362aa37f7eb23b2e18cca5ae.tar.gz"],
     )
 
     skylib_version = "1.0.3"
