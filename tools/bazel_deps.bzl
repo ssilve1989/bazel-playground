@@ -21,6 +21,7 @@ def fetch_dependencies():
         urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.20.0/rules_docker-v0.20.0.tar.gz"],
     )
 
+    # Protobuf Rulesets
     http_archive(
         name = "rules_proto",
         sha256 = "66bfdf8782796239d3875d37e7de19b1d94301e8972b3cbd2446b332429b4df1",
@@ -31,6 +32,14 @@ def fetch_dependencies():
         ],
     )
 
+    http_archive(
+        name = "rules_proto_grpc",
+        sha256 = "28724736b7ff49a48cb4b2b8cfa373f89edfcb9e8e492a8d5ab60aa3459314c8",
+        strip_prefix = "rules_proto_grpc-4.0.1",
+        urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/4.0.1.tar.gz"],
+    )
+
+    # rules_scala
     skylib_version = "1.0.3"
     http_archive(
         name = "bazel_skylib",

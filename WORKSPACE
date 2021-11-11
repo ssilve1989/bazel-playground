@@ -52,25 +52,37 @@ load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
 
 scala_repositories()
 
+load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
+
+scala_register_toolchains()
+
+load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
+
+rules_proto_grpc_toolchains()
+
+rules_proto_grpc_repos()
+
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 
 rules_proto_dependencies()
 
 rules_proto_toolchains()
 
-load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
+# Scala Proto setup
+load("@rules_proto_grpc//scala:repositories.bzl", RULES_PROTO_GRPC_SCALA_MAVEN_ARTIFACTS = "MAVEN_ARTIFACTS", rules_proto_grpc_scala_repos = "scala_repos")
 
-scala_register_toolchains()
+rules_proto_grpc_scala_repos()
 
-rules_proto_dependencies()
+load("@io_grpc_grpc_java//:repositories.bzl", "grpc_java_repositories")
 
-rules_proto_toolchains()
+grpc_java_repositories()
 
-# ScalaPB
-load("@io_bazel_rules_scala//scala_proto:scala_proto.bzl", "scala_proto_repositories")
+load("@rules_jvm_external//:defs.bzl", "maven_install")
 
-scala_proto_repositories()
-
-load("@io_bazel_rules_scala//scala_proto:toolchains.bzl", "scala_proto_register_toolchains")
-
-scala_proto_register_toolchains()
+maven_install(
+    name = "rules_proto_grpc_scala_maven",
+    artifacts = RULES_PROTO_GRPC_SCALA_MAVEN_ARTIFACTS,
+    repositories = [
+        "https://repo1.maven.org/maven2",
+    ],
+)
