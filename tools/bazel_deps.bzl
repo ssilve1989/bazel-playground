@@ -63,6 +63,6 @@ def fetch_dependencies():
     http_file(
         name = "com_github_akka_akka_gprc",
         urls = ["https://repo1.maven.org/maven2/com/lightbend/akka/grpc/akka-grpc-codegen_2.13/{}/akka-grpc-codegen_2.13-{}-assembly.jar".format(akka_grpc_version, akka_grpc_version)],
-        sha256 = "05d4c255141207e92069d07a5540b77cfe78ff4f4ce7fc79d5dd1c04c681c801",
+        sha256 = "0c230a7a1e6ac66ea3a1f7e96ed40ba2fbd179e9c02fb4d5495ef46e25f14bc7",
         executable = True,
     )

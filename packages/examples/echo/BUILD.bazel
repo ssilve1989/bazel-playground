@@ -25,6 +25,12 @@ proto_library(
     ],
 )
 
+# Generates the following files
+# EchoService.scala
+# EchoServiceClient.scala
+# EchoServiceHandler.scala
+# EchoServicePowerApi.scala
+# EchoServicePowerApiHandler.scala
 akka_proto_compile(
     name = "scala_power_api",
     protos = [
@@ -57,7 +63,7 @@ AKKA_DEPS = [
 scala_library(
     name = "scala",
     srcs = [
-        # ":scala.messages",
+        ":scala.messages",
         ":scala_power_api",
     ],
     deps = PROTO_DEPS + AKKA_DEPS,
