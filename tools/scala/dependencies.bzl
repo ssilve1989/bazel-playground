@@ -1,9 +1,10 @@
 """scala dependencies """
 
+AKKA_GRPC_VERSION = "1.1.1"
+AKKA_HTTP_VERSION = "10.2.7"
+AKKA_VERSION = "2.6.17"
+GRPC_VERSION = "1.35.0"
 SCALA_VERSION = "2.13"
-AKKA_HTTP_VERSION = "10.1.12"
-AKKA_VERSION = "2.6.10"
-GRPC_VERSION = "1.30.2"
 
 SCALA_DEPS = [
     "com.typesafe.akka:akka-http_%s:%s" % (SCALA_VERSION, AKKA_HTTP_VERSION),
@@ -21,8 +22,8 @@ SCALA_DEPS = [
     "com.typesafe.akka:akka-stream_%s:%s" % (SCALA_VERSION, AKKA_VERSION),
     "com.typesafe.akka:akka-testkit_%s:%s" % (SCALA_VERSION, AKKA_VERSION),
     "com.typesafe.akka:akka-http-testkit_%s:%s" % (SCALA_VERSION, AKKA_HTTP_VERSION),
-    "com.lightbend.akka.grpc:akka-grpc-runtime_%s:1.0.1" % SCALA_VERSION,
-    "com.lightbend.akka.grpc:akka-grpc-codegen_%s:1.0.0" % SCALA_VERSION,
+    "com.lightbend.akka.grpc:akka-grpc-runtime_%s:%s" % (SCALA_VERSION, AKKA_GRPC_VERSION),
+    "com.lightbend.akka.grpc:akka-grpc-codegen_%s:%s" % (SCALA_VERSION, AKKA_GRPC_VERSION),
     "io.grpc:grpc-api:%s" % GRPC_VERSION,
     "io.grpc:grpc-context:%s" % GRPC_VERSION,
     "io.grpc:grpc-core:%s" % GRPC_VERSION,
