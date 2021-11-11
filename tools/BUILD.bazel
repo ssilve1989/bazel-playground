@@ -1,4 +1,20 @@
-# Currently there are no targets in this Bazel package
+load("@rules_proto_grpc//:defs.bzl", "proto_plugin")
+
+package(default_visibility = ["//visibility:public"])
+
 exports_files([
     "rules_proto_config.yaml",
 ])
+
+proto_plugin(
+    name = "akka_plugin",
+    out = "{name}.jar",
+    options = [
+        "generate_client=true",
+        "generate_server=true",
+        "language=scala",
+        "server_power_apis=true",
+    ],
+    tool = "@com_github_akka_akka_gprc//file",
+    visibility = ["//visibility:public"],
+)

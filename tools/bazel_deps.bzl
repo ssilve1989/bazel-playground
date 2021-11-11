@@ -2,7 +2,7 @@
 # Unlike WORKSPACE, the content of this file is unordered.
 # We keep them separate to make the WORKSPACE file more maintainable.
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
 def fetch_dependencies():
     """
@@ -55,4 +55,14 @@ def fetch_dependencies():
         strip_prefix = "rules_scala-%s" % rules_scala_version,
         type = "zip",
         url = "https://github.com/bazelbuild/rules_scala/archive/%s.zip" % rules_scala_version,
+    )
+
+    # akka grpc protoplugin
+
+    akka_grpc_version = "0.7.1"
+    http_file(
+        name = "com_github_akka_akka_gprc",
+        urls = ["https://repo1.maven.org/maven2/com/lightbend/akka/grpc/akka-grpc-codegen_2.12/{}/akka-grpc-codegen_2.12-{}-assembly.jar".format(akka_grpc_version, akka_grpc_version)],
+        sha256 = "05d4c255141207e92069d07a5540b77cfe78ff4f4ce7fc79d5dd1c04c681c801",
+        executable = True,
     )

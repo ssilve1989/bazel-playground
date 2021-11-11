@@ -1,5 +1,7 @@
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@rules_proto_grpc//scala:defs.bzl", "scala_grpc_compile")
+
+# load("@rules_proto_grpc//scala:defs.bzl", "scala_grpc_compile")
+load("//tools:scala/proto.bzl", "akka_proto_compile")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -19,7 +21,7 @@ proto_library(
     ],
 )
 
-scala_grpc_compile(
+akka_proto_compile(
     name = "scala",
     protos = [
         ":message",
