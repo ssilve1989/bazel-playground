@@ -1,12 +1,14 @@
 load("@rules_proto//proto:defs.bzl", "proto_library")
-
-# load("@rules_proto_grpc//scala:defs.bzl", "scala_grpc_compile")
 load("//tools:scala/proto.bzl", "akka_proto_compile")
+load("@rules_proto_grpc//scala:defs.bzl", "scala_proto_compile")
+load("@rules_proto_grpc//scala:scala_proto_library.bzl", "PROTO_DEPS")
+load("@io_bazel_rules_scala//scala:scala.bzl", "scala_library")
+load("//tools:scala/dependencies.bzl", "scala_dep")
 
 package(default_visibility = ["//visibility:public"])
 
 proto_library(
-    name = "message",
+    name = "proto.messages",
     srcs = [
         "echo.proto",
         "stream_echo.proto",
@@ -14,17 +16,49 @@ proto_library(
 )
 
 proto_library(
-    name = "service",
-    srcs = ["echo_service.proto"],
+    name = "proto.service",
+    srcs = [
+        "echo_service.proto",
+    ],
     deps = [
-        ":message",
+        ":proto.messages",
     ],
 )
 
 akka_proto_compile(
-    name = "scala",
+    name = "scala_power_api",
     protos = [
-        ":message",
-        ":service",
+        ":proto.service",
     ],
+)
+
+scala_proto_compile(
+    name = "scala.messages",
+    protos = [
+        ":proto.messages",
+    ],
+)
+
+AKKA_DEPS = [
+    scala_dep("@maven//:com_typesafe_akka_akka_http"),
+    scala_dep("@maven//:com_typesafe_akka_akka_http_core"),
+    scala_dep("@maven//:com_typesafe_akka_akka_actor"),
+    scala_dep("@maven//:com_typesafe_akka_akka_stream"),
+    scala_dep("@maven//:com_lightbend_akka_grpc_akka_grpc_runtime"),
+    scala_dep("@maven//:com_lightbend_akka_grpc_akka_grpc_codegen"),
+    "@maven//:io_grpc_grpc_api",
+    "@maven//:io_grpc_grpc_core",
+    "@maven//:io_grpc_grpc_stub",
+    "@maven//:io_grpc_grpc_protobuf",
+    "@maven//:io_grpc_grpc_netty",
+    "@maven//:io_grpc_grpc_context",
+]
+
+scala_library(
+    name = "scala",
+    srcs = [
+        # ":scala.messages",
+        ":scala_power_api",
+    ],
+    deps = PROTO_DEPS + AKKA_DEPS,
 )

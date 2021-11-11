@@ -78,10 +78,19 @@ load("@io_grpc_grpc_java//:repositories.bzl", "grpc_java_repositories")
 grpc_java_repositories()
 
 load("@rules_jvm_external//:defs.bzl", "maven_install")
+load("//tools:scala/dependencies.bzl", "SCALA_DEPS")
 
 maven_install(
     name = "rules_proto_grpc_scala_maven",
     artifacts = RULES_PROTO_GRPC_SCALA_MAVEN_ARTIFACTS,
+    repositories = [
+        "https://repo1.maven.org/maven2",
+    ],
+)
+
+maven_install(
+    name = "maven",
+    artifacts = SCALA_DEPS,
     repositories = [
         "https://repo1.maven.org/maven2",
     ],
