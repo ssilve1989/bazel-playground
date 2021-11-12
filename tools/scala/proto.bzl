@@ -11,6 +11,7 @@ load(
     "proto_compile_impl",
 )
 
+# TODO: See which deps are actually relevant for compilation
 GRPC_ARTIFACTS = [
     scala_dep("@maven//:com_typesafe_akka_akka_http"),
     scala_dep("@maven//:com_typesafe_akka_akka_http_core"),
@@ -48,6 +49,7 @@ def scala_grpc_library(name, protos, **kwargs):
             "*": [
                 "grpc",
                 "flat_package",
+                "no_lenses",
             ],
         },
         protos = protos,

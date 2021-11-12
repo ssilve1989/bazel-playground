@@ -23,6 +23,7 @@ MAVEN_ARTIFACTS = [
     "com.typesafe.akka:akka-stream_%s:%s" % (SCALA_VERSION, AKKA_VERSION),
     "com.typesafe.akka:akka-testkit_%s:%s" % (SCALA_VERSION, AKKA_VERSION),
     "com.typesafe.akka:akka-http-testkit_%s:%s" % (SCALA_VERSION, AKKA_HTTP_VERSION),
+    "com.typesafe:config:1.4.1",
     "com.lightbend.akka.grpc:akka-grpc-runtime_%s:%s" % (SCALA_VERSION, AKKA_GRPC_VERSION),
     "com.lightbend.akka.grpc:akka-grpc-codegen_%s:%s" % (SCALA_VERSION, "1.1.1"),  # akka-grpc-codegen for scala 2.13 is only supported at version 1.1.1, not the version 2.x line
     "io.grpc:grpc-api:%s" % GRPC_VERSION,

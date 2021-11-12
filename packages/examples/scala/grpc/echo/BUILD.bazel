@@ -1,0 +1,18 @@
+load("@io_bazel_rules_scala//scala:scala.bzl", "scala_binary")
+load("//tools:scala/dependencies.bzl", "scala_dep")
+
+scala_binary(
+    name = "echo",
+    srcs = glob(["**/*.scala"]),
+    main_class = "packages.examples.scala.grpc.echo.EchoServer",
+    deps = [
+        "//packages/examples/echo:scala",
+        scala_dep("@maven//:com_typesafe_akka_akka_http"),
+        scala_dep("@maven//:com_typesafe_akka_akka_actor"),
+        scala_dep("@maven//:com_typesafe_akka_akka_http_core"),
+        scala_dep("@maven//:com_typesafe_akka_akka_stream"),
+        scala_dep("@maven//:com_lightbend_akka_grpc_akka_grpc_runtime"),
+        scala_dep("@maven//:com_thesamet_scalapb_scalapb_runtime"),
+        "@maven//:com_typesafe_config",
+    ],
+)
