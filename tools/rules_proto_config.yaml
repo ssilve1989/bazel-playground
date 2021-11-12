@@ -1,0 +1,20 @@
+plugins:
+  - name: protoc-gen-scala
+    implementation: scalapb:scalapb:protoc-gen-scala
+rules:
+  - name: proto_compile
+    implementation: stackb:rules_proto:proto_compile
+    visibility:
+      - //visibility:public
+  - name: scala_proto_library
+    implementation: bazelbuild:rules_scala:scala_proto_library
+    visibility:
+      - //visibility:public
+languages:
+  - name: scala
+    plugins:
+      - protoc-gen-scala
+    rules:
+      - proto_compile
+      - scala_proto_library
+    enabled: false

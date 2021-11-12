@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package packages.examples.echo;
+
+import "packages/examples/echo/echo.proto";
+import "packages/examples/echo/stream_echo.proto";
+
+service EchoService {
+  /* Streams the response back with the timestamp of the server */
+  rpc Echo(EchoRequest) returns (EchoResponse);
+
+  /* Streams all echo messages coming into the system optionally filtered by a
+   * pattern */
+  rpc StreamEcho(StreamEchoRequest) returns (stream StreamEchoResponse);
+}

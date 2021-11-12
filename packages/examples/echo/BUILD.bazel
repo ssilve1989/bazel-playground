@@ -1,0 +1,30 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("//tools:scala/proto.bzl", "scala_grpc_library")
+
+package(default_visibility = ["//visibility:public"])
+
+proto_library(
+    name = "proto.messages",
+    srcs = [
+        "echo.proto",
+        "stream_echo.proto",
+    ],
+)
+
+proto_library(
+    name = "proto.service",
+    srcs = [
+        "echo_service.proto",
+    ],
+    deps = [
+        ":proto.messages",
+    ],
+)
+
+scala_grpc_library(
+    name = "scala",
+    protos = [
+        ":proto.messages",
+        ":proto.service",
+    ],
+)

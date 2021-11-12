@@ -1,0 +1,10 @@
+syntax = "proto2";
+
+package packages.examples.echo;
+
+message EchoRequest { required string message = 1; }
+
+message EchoResponse {
+  required string message = 1;
+  required int64 timestamp = 2;
+}
