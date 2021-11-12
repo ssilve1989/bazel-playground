@@ -1,13 +1,13 @@
 """scala dependencies """
 
-AKKA_GRPC_VERSION = "1.1.1"
+AKKA_GRPC_VERSION = "2.1.1"
 AKKA_HTTP_VERSION = "10.2.7"
 AKKA_VERSION = "2.6.17"
-GRPC_VERSION = "1.35.0"
+GRPC_VERSION = "1.41.0"
 SCALA_VERSION = "2.13"
-SCALAPB_VERSION = "0.10.11"
+SCALAPB_VERSION = "0.11.6"
 
-SCALA_DEPS = [
+MAVEN_ARTIFACTS = [
     "com.typesafe.akka:akka-http_%s:%s" % (SCALA_VERSION, AKKA_HTTP_VERSION),
     "com.typesafe.akka:akka-actor-testkit-typed_%s:%s" % (SCALA_VERSION, AKKA_VERSION),
     "com.typesafe.akka:akka-actor-typed_%s:%s" % (SCALA_VERSION, AKKA_VERSION),
@@ -24,18 +24,15 @@ SCALA_DEPS = [
     "com.typesafe.akka:akka-testkit_%s:%s" % (SCALA_VERSION, AKKA_VERSION),
     "com.typesafe.akka:akka-http-testkit_%s:%s" % (SCALA_VERSION, AKKA_HTTP_VERSION),
     "com.lightbend.akka.grpc:akka-grpc-runtime_%s:%s" % (SCALA_VERSION, AKKA_GRPC_VERSION),
-    "com.lightbend.akka.grpc:akka-grpc-codegen_%s:%s" % (SCALA_VERSION, AKKA_GRPC_VERSION),
+    "com.lightbend.akka.grpc:akka-grpc-codegen_%s:%s" % (SCALA_VERSION, "1.1.1"),  # akka-grpc-codegen for scala 2.13 is only supported at version 1.1.1, not the version 2.x line
     "io.grpc:grpc-api:%s" % GRPC_VERSION,
     "io.grpc:grpc-context:%s" % GRPC_VERSION,
     "io.grpc:grpc-core:%s" % GRPC_VERSION,
     "io.grpc:grpc-netty:%s" % GRPC_VERSION,
     "io.grpc:grpc-protobuf:%s" % GRPC_VERSION,
     "io.grpc:grpc-stub:%s" % GRPC_VERSION,
-    "com.thesamet.scalapb:scalapb-json4s_%s:0.10.0" % SCALA_VERSION,
     "com.thesamet.scalapb:scalapb-runtime-grpc_%s:%s" % (SCALA_VERSION, SCALAPB_VERSION),
     "com.thesamet.scalapb:scalapb-runtime_%s:%s" % (SCALA_VERSION, SCALAPB_VERSION),
-    "com.thesamet.scalapb:scalapbc_%s:%s" % (SCALA_VERSION, SCALAPB_VERSION),
-    "com.google.protobuf:protobuf-java:3.15.8",
 ]
 
 def scala_dep(dep):
