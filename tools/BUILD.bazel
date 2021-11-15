@@ -1,4 +1,6 @@
 load("@rules_proto_grpc//:defs.bzl", "proto_plugin")
+load("@rules_java//java:defs.bzl", "java_binary")
+load("//tools:scala/dependencies.bzl", "scala_dep")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -6,6 +8,7 @@ exports_files([
     "rules_proto_config.yaml",
 ])
 
+# akka codegen plugin for generating power apis
 proto_plugin(
     name = "akka_plugin",
     out = "{name}.jar",
@@ -17,5 +20,20 @@ proto_plugin(
         "flat_package",
     ],
     tool = "@com_github_akka_akka_gprc//file",
-    visibility = ["//visibility:public"],
+)
+
+# scalapb plugin to use the version of scalapb with the version of scala that we want, not the one rules_proto_grpc wants
+proto_plugin(
+    name = "scalapb_plugin",
+    out = "{name}.jar",
+    tool = ":scala_pb_plugin_bin",
+    use_built_in_shell_environment = True,
+)
+
+java_binary(
+    name = "scala_pb_plugin_bin",
+    main_class = "scalapb.ScalaPbCodeGenerator",
+    runtime_deps = [
+        scala_dep("@maven//:com_thesamet_scalapb_compilerplugin"),
+    ],
 )
