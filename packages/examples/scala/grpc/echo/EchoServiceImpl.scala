@@ -35,7 +35,11 @@ class EchoServiceImpl(implicit materializer: Materializer) extends EchoServicePo
       metadata: Metadata
   ): Source[StreamEchoResponse, NotUsed] = {
     source
-      .filter(message => message.contains(in.pattern))
+      .filter(message => {
+        in.pattern.forall { pattern =>
+          message.contains(pattern)
+        }
+      })
       .map(message => StreamEchoResponse(message, System.currentTimeMillis()))
   }
 }

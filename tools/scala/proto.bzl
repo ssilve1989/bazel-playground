@@ -1,17 +1,10 @@
 """Scala build rules"""
 
 load("//tools:scala/dependencies.bzl", "scala_dep")
-load("@rules_proto_grpc//scala:defs.bzl", "scala_proto_compile")
-load("@rules_proto_grpc//scala:scala_proto_library.bzl", "PROTO_DEPS")
 load("@io_bazel_rules_scala//scala:scala.bzl", "scala_library")
-load(
-    "@rules_proto_grpc//:defs.bzl",
-    "ProtoPluginInfo",
-    "proto_compile_attrs",
-    "proto_compile_impl",
-)
+load("//tools:scala/akka.bzl", "akka_proto_compile")
+load("//tools:scala/scalapb.bzl", "scala_proto_compile")
 
-# TODO: See which deps are actually relevant for compilation
 GRPC_ARTIFACTS = [
     scala_dep("@maven//:com_typesafe_akka_akka_http"),
     scala_dep("@maven//:com_typesafe_akka_akka_http_core"),
@@ -26,6 +19,7 @@ GRPC_ARTIFACTS = [
     "@maven//:io_grpc_grpc_context",
     scala_dep("@maven//:com_thesamet_scalapb_scalapb_runtime"),
     scala_dep("@maven//:com_thesamet_scalapb_scalapb_runtime_grpc"),
+    scala_dep("@maven//:com_thesamet_scalapb_lenses"),
 ]
 
 def scala_grpc_library(name, protos, **kwargs):
@@ -38,11 +32,13 @@ def scala_grpc_library(name, protos, **kwargs):
     akka_grpc_target = name + "_akka_grpc"
     scalapb_proto_target = name + "_scalapb"
 
+    # Generates the PowerAPIs
     akka_proto_compile(
         name = akka_grpc_target,
         protos = protos,
     )
 
+    # Generates the scalapb protos (message protos, etc)
     scala_proto_compile(
         name = scalapb_proto_target,
         options = {
@@ -61,21 +57,6 @@ def scala_grpc_library(name, protos, **kwargs):
             ":" + scalapb_proto_target,
             ":" + akka_grpc_target,
         ],
-        deps = PROTO_DEPS + GRPC_ARTIFACTS,
+        deps = GRPC_ARTIFACTS + ["@rules_proto_grpc_scala_maven//:com_google_protobuf_protobuf_java"],
         **kwargs
     )
-
-akka_proto_compile = rule(
-    implementation = proto_compile_impl,
-    attrs = dict(
-        proto_compile_attrs,
-        _plugins = attr.label_list(
-            providers = [ProtoPluginInfo],
-            default = [
-                Label("//tools:akka_plugin"),
-            ],
-            doc = "List of protoc plugins to apply",
-        ),
-    ),
-    toolchains = [str(Label("@rules_proto_grpc//protobuf:toolchain_type"))],
-)
