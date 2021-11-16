@@ -1,5 +1,7 @@
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//tools:scala/proto.bzl", "scala_grpc_library")
+load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin")
+load("//tools:node/protobufjs.bzl", "protobufjs_library")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -27,4 +29,19 @@ scala_grpc_library(
         ":proto.messages",
         ":proto.service",
     ],
+)
+
+copy_to_bin(
+    name = "proto_copy",
+    srcs = [
+        "echo.proto",
+        "echo_service.proto",
+        "stream_echo.proto",
+    ],
+)
+
+protobufjs_library(
+    name = "js",
+    package_name = "@examples/echo",
+    proto = ":proto.messages",
 )

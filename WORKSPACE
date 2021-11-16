@@ -26,10 +26,13 @@ container_deps()
 # NodeJS Setup
 load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
 load("@io_bazel_rules_docker//nodejs:image.bzl", _nodejs_image_repos = "repositories")
+load("@rules_proto_grpc//js:repositories.bzl", rules_proto_grpc_js_repos = "js_repos")
 
 node_repositories(
     use_nvmrc = "//:.nvmrc",
 )
+
+rules_proto_grpc_js_repos()
 
 yarn_install(
     name = "npm",

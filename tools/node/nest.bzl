@@ -1,4 +1,5 @@
 """Help Macro to facilitate creating Nest application targets"""
+
 load("//tools:node/ts_project.bzl", "ts_project")
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 load("@io_bazel_rules_docker//nodejs:image.bzl", "nodejs_image")
@@ -10,11 +11,14 @@ NEST_DATA = [
 
 def nest_app(name, srcs, entry_point, **kwargs):
     deps = kwargs.pop("deps", [])
+    data = kwargs.pop("data", [])
 
     ts_project(
         name = "source",
         srcs = srcs,
-        deps = deps + NEST_DATA,
+        deps = deps + NEST_DATA + [
+            "@npm//@types/node",
+        ],
         **kwargs
     )
 
@@ -22,8 +26,9 @@ def nest_app(name, srcs, entry_point, **kwargs):
         name = name,
         data = [
             ":source",
-        ],
+        ] + data,
         # link_workspace_root is broken as of rule_nodejs v4
+        link_workspace_root = True,
         args = [
             "--bazel_patch_module_resolver",
         ],
@@ -32,7 +37,7 @@ def nest_app(name, srcs, entry_point, **kwargs):
     )
 
     nodejs_image(
-      name = "image",
-      binary = name,
-      args = ["--bazel_patch_module_resolver"]
+        name = "image",
+        binary = name,
+        args = ["--bazel_patch_module_resolver"],
     )

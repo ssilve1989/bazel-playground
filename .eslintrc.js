@@ -14,5 +14,16 @@ module.exports = {
   ],
   rules: {
     "no-underscore-dangle": "error",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        vars: "all",
+        args: "after-used",
+        ignoreRestSiblings: true,
+        varsIgnorePattern: "^_",
+        argsIgnorePattern: "^_",
+      },
+    ],
   },
 };

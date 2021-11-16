@@ -1,0 +1,15 @@
+load("//tools:node/index.bzl", "nest_app")
+
+nest_app(
+    name = "server",
+    srcs = glob(["src/**/*.ts"]),
+    data = [
+        "//packages/examples/echo:proto_copy",
+    ],
+    entry_point = ":src/main.ts",
+    deps = [
+        "//packages/examples/echo:js",
+        "@npm//@grpc/grpc-js",
+        "@npm//@nestjs/microservices",
+    ],
+)
