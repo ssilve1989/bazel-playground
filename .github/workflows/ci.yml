@@ -29,6 +29,9 @@ jobs:
       - name: Build
         run: bazelisk build --config=ci --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_ORG_API_KEY }} //...
 
+      - name: Test
+        run: bazelisk test --config=ci --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_ORG_API_KEY }} //...
+
   build-macos-bigsur:
     runs-on: macos-11
 
@@ -41,6 +44,9 @@ jobs:
       - name: Build
         run: bazelisk build --config=ci --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_ORG_API_KEY }} //...
 
+      - name: Test
+        run: bazelisk test --config=ci --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_ORG_API_KEY }} //...
+
   build-macos-latest:
     runs-on: macos-latest
 
@@ -52,3 +58,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Build
         run: bazelisk build --config=ci --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_ORG_API_KEY }} //...
+
+      - name: Test
+        run: bazelisk test --config=ci --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_ORG_API_KEY }} //...
