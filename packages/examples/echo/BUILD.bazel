@@ -1,7 +1,7 @@
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//tools/scala:proto.bzl", "scala_grpc_library")
 load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin")
-load("//tools:node/protobufjs.bzl", "protobufjs_library")
+load("//tools/node:protobufjs.bzl", "protobufjs_library")
 
 package(default_visibility = ["//visibility:public"])
 

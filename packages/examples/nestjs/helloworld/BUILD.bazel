@@ -1,8 +1,8 @@
-load("//tools:node/index.bzl", "nest_app")
+load("//tools/node:index.bzl", "nest_app")
 
 nest_app(
-  name = "helloworld",
-  srcs = glob(["*.ts"]),
-  entry_point = ":main.ts",
-  deps = []
+    name = "helloworld",
+    srcs = glob(["*.ts"]),
+    entry_point = ":main.ts",
+    deps = [],
 )

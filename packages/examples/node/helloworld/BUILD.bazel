@@ -1,4 +1,4 @@
-load("//tools:node/index.bzl", "ts_project")
+load("//tools/node:index.bzl", "ts_project")
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 
 ts_project(
