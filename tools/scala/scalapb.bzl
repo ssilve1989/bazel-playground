@@ -19,7 +19,7 @@ scala_proto_compile = rule(
         _plugins = attr.label_list(
             providers = [ProtoPluginInfo],
             default = [
-                Label("//tools:scalapb_plugin"),
+                Label("//tools/scala:scalapb_plugin"),
             ],
             doc = "List of protoc plugins to apply",
         ),

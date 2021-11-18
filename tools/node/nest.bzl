@@ -1,6 +1,6 @@
 """Help Macro to facilitate creating Nest application targets"""
 
-load("//tools:node/ts_project.bzl", "ts_project")
+load("//tools/node:ts_project.bzl", "ts_project")
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 load("@io_bazel_rules_docker//nodejs:image.bzl", "nodejs_image")
 
