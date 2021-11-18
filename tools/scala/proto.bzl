@@ -1,9 +1,9 @@
 """Scala build rules"""
 
-load("//tools:scala/dependencies.bzl", "scala_dep")
+load("//tools/scala:dependencies.bzl", "scala_dep")
 load("@io_bazel_rules_scala//scala:scala.bzl", "scala_library")
-load("//tools:scala/akka.bzl", "akka_proto_compile")
-load("//tools:scala/scalapb.bzl", "scala_proto_compile")
+load("//tools/scala:akka.bzl", "akka_proto_compile")
+load("//tools/scala:scalapb.bzl", "scala_proto_compile")
 
 GRPC_ARTIFACTS = [
     scala_dep("@maven//:com_typesafe_akka_akka_http"),

@@ -14,7 +14,7 @@ akka_proto_compile = rule(
         _plugins = attr.label_list(
             providers = [ProtoPluginInfo],
             default = [
-                Label("//tools:akka_plugin"),
+                Label("//tools/scala:akka_plugin"),
             ],
             doc = "List of protoc plugins to apply",
         ),

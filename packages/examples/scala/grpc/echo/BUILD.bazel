@@ -1,5 +1,5 @@
 load("@io_bazel_rules_scala//scala:scala.bzl", "scala_binary")
-load("//tools:scala/dependencies.bzl", "scala_dep")
+load("//tools/scala:dependencies.bzl", "scala_dep")
 
 scala_binary(
     name = "echo",
