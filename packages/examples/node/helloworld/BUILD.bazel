@@ -4,6 +4,9 @@ load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 ts_project(
     name = "source",
     srcs = ["main.ts"],
+    deps = [
+        "//packages/common/math",
+    ],
 )
 
 nodejs_binary(
@@ -12,4 +15,5 @@ nodejs_binary(
         ":source",
     ],
     entry_point = ":main.ts",
+    link_workspace_root = True,
 )

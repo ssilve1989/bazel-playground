@@ -25,5 +25,8 @@ module.exports = {
         argsIgnorePattern: "^_",
       },
     ],
+    // These dont even seem to be working right?
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
   },
 };

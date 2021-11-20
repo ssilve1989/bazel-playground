@@ -29,6 +29,7 @@ def ts_project(name, **kwargs):
         srcs = srcs,
         deps = deps,
         tsconfig = tsconfig,
+        declaration = True,
         **kwargs
     )
 
