@@ -8,4 +8,5 @@ exports_files([
     "package.json",
     "tsconfig.json",
     "yarn.lock",
+    "jest.config.js",
 ])

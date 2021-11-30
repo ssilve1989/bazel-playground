@@ -1,9 +1,18 @@
 load("//tools/node:index.bzl", "ts_project")
+load("//tools/node:jest.bzl", "jest_test")
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 
 ts_project(
     name = "source",
     srcs = ["main.ts"],
+)
+
+jest_test(
+    name = "test",
+    srcs = ["main.spec.ts"],
+    deps = [
+        ":main.ts",
+    ],
 )
 
 nodejs_binary(
