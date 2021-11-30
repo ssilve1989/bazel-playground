@@ -1,11 +1,23 @@
-load("//tools/node:index.bzl", "ts_project")
+load("//tools/node:index.bzl", "jest_test", "ts_project")
 
 package(default_visibility = ["//visibility:public"])
 
 ts_project(
     name = "rxjs",
-    srcs = glob(["**/*.ts"]),
+    srcs = glob(
+        ["**/*.ts"],
+        exclude = ["*.spec.ts"],
+    ),
     deps = [
         "@npm//rxjs",
+    ],
+)
+
+jest_test(
+    name = "test",
+    srcs = glob(["**/*.spec.ts"]),
+    deps = [
+        ":rxjs",
+        "@npm//rxjs-marbles",
     ],
 )
