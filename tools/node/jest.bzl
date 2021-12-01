@@ -18,7 +18,9 @@ def jest_test(name, srcs, deps, jest_config = None, **kwargs):
 
     _jest_test(
         name = name,
-        data = data,
+        data = data + [
+            "//:tsconfig.json",
+        ],
         templated_args = templated_args,
         **kwargs
     )
