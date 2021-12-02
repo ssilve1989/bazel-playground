@@ -66,3 +66,9 @@ def fetch_dependencies():
         sha256 = "0c230a7a1e6ac66ea3a1f7e96ed40ba2fbd179e9c02fb4d5495ef46e25f14bc7",
         executable = True,
     )
+
+    http_archive(
+        name = "rules_python",
+        url = "https://github.com/bazelbuild/rules_python/releases/download/0.5.0/rules_python-0.5.0.tar.gz",
+        sha256 = "cd6730ed53a002c56ce4e2f396ba3b3be262fd7cb68339f0377a45e8227fe332",
+    )
