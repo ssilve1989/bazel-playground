@@ -71,6 +71,8 @@ export function throttle<T>(
           },
         })
       );
+
+      return () => group.unsubscribe();
     });
   };
 }
