@@ -10,6 +10,23 @@ export interface ThrottleConfig {
   windowSize: number;
 }
 
+/**
+ * Provides a way to throttle emissions by only allowing a single emission through in the given window. A pseudo-buffer is maintained that schedules subsequent emissions within the window
+ * up to the bufferSize. If `errorOnOverflow` is set, reaching the bufferSize within the window will throw an error, otherwise it behaves like a standard throttle and will drop the emissions
+ *
+ *
+ * ```typescript
+ * const onePerSecond$ = range(0, 10).pipe(throttle({ windowSize: 1000 })) // yields one emission every second
+ *
+ * const overflow$ = range(0, 10).pipe(throttle({ windowSize: 1000, bufferSize: 5, errorOnOverflow: true }))
+ * ```
+ *
+ * @param config.windowSize The window in which to allow a single emission to pass through
+ * @param config.bufferSize The amount of emissions allowed to be scheduled within the window time set
+ * @param config.errorOnOverflow will raise an error if more emissions than the allowed bufferSize are received within the windowSize
+ * @param scheduler
+ * @returns
+ */
 export function throttle<T>(
   { windowSize, bufferSize, errorOnOverflow }: ThrottleConfig,
   scheduler: SchedulerLike = asyncScheduler
@@ -19,6 +36,7 @@ export function throttle<T>(
       let done = false;
       let buffered = 0;
       let lastEmissionTime: number | undefined;
+      const group = new Subscription();
 
       const emit = (value: T) => {
         observer.next(value);
@@ -51,13 +69,13 @@ export function throttle<T>(
 
         // accumulate the buffer
         buffered += 1;
-        scheduler.schedule(() => {
+        const scheduled = scheduler.schedule(() => {
           buffered -= 1;
           emit(value);
         }, lastEmissionTime + windowSize * buffered - scheduler.now());
-      };
 
-      const group = new Subscription();
+        group.add(scheduled);
+      };
 
       group.add(
         source$.subscribe({
