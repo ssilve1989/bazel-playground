@@ -21,7 +21,7 @@
     "jest": "^27.4.2",
     "jest-cli": "^27.4.2",
     "jsdoc": "^3.6.7",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "prettier": "^2.4.1",
     "rxjs-marbles": "^7.0.1",
     "semver": "^7.3.5",
